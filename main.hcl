@@ -1,8 +1,8 @@
 resource "lab" "main" {
-  title       = "my_new_lab_praneeth_change_3"
+  title       = "Deploy your first app to Cloud Run"
   description = <<-EOF
-  This is the Skeleton Lab.
-  You can use this as a minimal starting point for developing labs.
+  Build a small Python web app, run it locally, and deploy it to Google Cloud Run
+  from source. Then ship a change and watch Cloud Run roll out a new revision.
   EOF
 
   # timelimit and idle are both required on every lab.
@@ -10,7 +10,8 @@ resource "lab" "main" {
     theme = "modern-dark"
 
     timelimit {
-      duration = "1h"
+      duration   = "1h"
+      show_timer = true
     }
 
     idle {
@@ -19,5 +20,37 @@ resource "lab" "main" {
     }
   }
 
-  layout = resource.layout.single_panel
+  layout = resource.layout.workstation
+
+  content {
+    title = "Cloud Run"
+
+    chapter "setup" {
+      title = "Get set up"
+
+      page "configure" {
+        reference = resource.page.configure
+      }
+    }
+
+    chapter "build" {
+      title = "Build the app"
+
+      page "run_locally" {
+        reference = resource.page.run_locally
+      }
+    }
+
+    chapter "deploy" {
+      title = "Deploy to Cloud Run"
+
+      page "deploy" {
+        reference = resource.page.deploy
+      }
+
+      page "update" {
+        reference = resource.page.update
+      }
+    }
+  }
 }
